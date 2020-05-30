@@ -1,6 +1,8 @@
 import DBConnect from './DBConnect.js';
 import renderModal from "./renderModal.js";
 
+const preloader = document.querySelector('.preloader');
+
 const showModal = () => {
     document.addEventListener('click', event => {
         event.preventDefault();
@@ -10,6 +12,7 @@ const showModal = () => {
 
         // открываем окно
         if (card) {
+            preloader.style.display = 'block';
             new DBConnect().getTvShow(card.id)
                 .then((response) => {
                     renderModal(response);
@@ -17,6 +20,9 @@ const showModal = () => {
                 .then(() => {
                     modal.classList.remove('hide');
                     document.body.style.overflow = 'hidden';
+                })
+                .finally(() => {
+                    preloader.style.display = 'none';
                 })
         }
 

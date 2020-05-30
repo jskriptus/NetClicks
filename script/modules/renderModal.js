@@ -8,7 +8,7 @@ const renderModal = (data) => {
         description = document.querySelector('.description'),
         modalLink = document.querySelector('.modal__link');
 
-    tvCardImg.src = IMG_URL + data.poster_path;
+    data.poster_path ? tvCardImg.src = IMG_URL + data.poster_path : tvCardImg.src = '/img/no-poster.jpg';
 
     tvCardImg.alt = data.name;
 
@@ -18,7 +18,7 @@ const renderModal = (data) => {
     //     genresList.innerHTML += `<li>${genre.name}</li>`;
     // });
     genresList.innerHTML = data.genres.reduce((acc, genre) => `${acc}<li>${genre.name}</li>`, '');
-    
+
     rating.textContent = data.vote_average;
 
     description.textContent = data.overview;
